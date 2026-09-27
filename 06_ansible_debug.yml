@@ -1,0 +1,31 @@
+---
+- name: Cisco ios gather facts
+  hosts: R1
+  tasks:
+
+    - name: Print ansible_facts fron host_vars
+      ansible.builtin.debug:
+        msg: "{{ test_var1 }}"
+        verbosity: 3
+
+    - name: Print ansible_facts fron host_vars
+      ansible.builtin.debug:
+        var: test_var2
+
+    - name: Print ansible_facts
+      ansible.builtin.debug:
+        msg: 
+          - "{{ ansible_facts.net_iostype }}"
+          - "{{ ansible_facts.net_model }}"
+
+    - name: Print ansible_facts in Literal block scalar (adds new lines new lines))
+      ansible.builtin.debug:
+        msg: |
+          IOS type is: {{ ansible_facts.net_iostype }}
+          Model is: {{ ansible_facts.net_model }}
+
+    - name: Print ansible_facts in folded block scalar (adds spa)
+      ansible.builtin.debug:
+        msg: >
+          IOS type is: {{ ansible_facts.net_iostype }}
+          Model is: {{ ansible_facts.net_model }}

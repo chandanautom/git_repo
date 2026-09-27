@@ -1,0 +1,29 @@
+---
+- name: Cisco ios_commands
+  hosts: R1
+  gather_facts: false
+  tasks:
+    - name: Show version
+      cisco.ios.ios_command:
+        commands:
+          - show version
+      register: show_version_output
+
+    - name: Show ip interface brief
+      cisco.ios.ios_command:
+        commands:
+          - show ip interface brief
+      register: show_ip_int_brief_output
+
+    - name: Show running config
+      cisco.ios.ios_command:
+        commands:
+          - show running-config
+      register: show_running_config_output
+
+    - name: Display outputs
+      ansible.builtin.debug:
+        msg:
+          - "{{ show_version_output.stdout_lines }}"
+          - "{{ show_ip_int_brief_output.stdout_lines }}"
+          - "{{ show_running_config_output.stdout_lines }}"

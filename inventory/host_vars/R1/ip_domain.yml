@@ -1,1 +1,8 @@
 ip_domain_name: R1_host_dir.com
+test_var1: |
+  abc
+  xyz
+test_var2: >
+  123
+  456
+intf_id: 0/0

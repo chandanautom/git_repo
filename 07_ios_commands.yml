@@ -1,0 +1,50 @@
+---
+- name: Cisco ios_commands
+  hosts: routers
+  gather_facts: false
+
+  tasks:
+    # - name: Send command
+    #   cisco.ios.ios_command:
+    #     commands:
+    #       - show version
+    #       - show ip interface brief
+    #   register: show_command_output
+
+    - name: Send command and wait for specific output with match all
+      cisco.ios.ios_command:
+        commands:
+          - show version
+          - show ip interface brief
+        match: all
+        wait_for:
+          - result[0] contains R1
+          - result[1] contains GigabitEthernet0/0
+      register: show_command_output
+
+    # - name: Send command and wait for specific output with match any
+    #   cisco.ios.ios_command:
+    #     commands:
+    #       - show version
+    #       - show ip interface brief
+    #     match: any
+    #     wait_for:
+    #       - result[0] contains Cisco
+    #       - result[1] contains GigabitEthernet0/0
+    #   register: show_command_output
+
+    - name: Display command outputs
+      ansible.builtin.debug:
+        msg: "{{ show_command_output }}"
+
+    # - name: Display command outputs in stdout format
+    #   ansible.builtin.debug:
+    #     msg: "{{ show_command_output.stdout_lines }}"
+
+    # - name: Display command outputs of show version in stdout format
+    #   ansible.builtin.debug:
+    #     msg: "{{ show_command_output.stdout_lines[0] }}"
+
+    # - name: Display command outputs of show ip interface brief in stdout format
+    #   ansible.builtin.debug:
+    #     msg: "{{ show_command_output.stdout_lines[1] }}"
