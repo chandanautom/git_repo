@@ -13,20 +13,20 @@
     #     lines: ip domain name test.com
     #   register: router_domain_name
 
-    # - name: Configure domain name and save the backup in default backup folder 
-    #   cisco.ios.ios_config:
-    #     lines: ip domain name test.com
-    #     backup: yes
-    #   register: router_domain_name
-
-    - name: Configure domain name, save baclup in hostname based filder with timestap
+    - name: Configure domain name and save the backup in default backup folder 
       cisco.ios.ios_config:
         lines: ip domain name test.com
         backup: yes
-        backup_options:
-          dir_path: ./device_backup/{{ inventory_hostname }}/
-          filename: "{{ inventory_hostname }}_{{ lookup('pipe', 'date +%Y-%m-%d_%H:%M:%S') }}.txt"
       register: router_domain_name
+
+    # - name: Configure domain name, save baclup in hostname based filder with timestap
+    #   cisco.ios.ios_config:
+    #     lines: ip domain name test.com
+    #     backup: yes
+    #     backup_options:
+    #       dir_path: ./device_backup/{{ inventory_hostname }}/
+    #       filename: "{{ inventory_hostname }}_{{ lookup('pipe', 'date +%Y-%m-%d_%H:%M:%S') }}.txt"
+    #   register: router_domain_name
 
     - name: Print router domain name
       ansible.builtin.debug:
