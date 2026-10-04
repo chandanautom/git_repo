@@ -18,14 +18,30 @@
           - "{{ ansible_facts.net_iostype }}"
           - "{{ ansible_facts.net_model }}"
 
-    - name: Print ansible_facts in Literal block scalar (adds new lines new lines))
-      ansible.builtin.debug:
-        msg: |
-          IOS type is: {{ ansible_facts.net_iostype }}
-          Model is: {{ ansible_facts.net_model }}
+    # - name: Print ansible_facts in Literal block scalar (adds new lines new lines))
+    #   ansible.builtin.debug:
+    #     msg: |
+    #       IOS type is: {{ ansible_facts.net_iostype }}
+    #       Model is: {{ ansible_facts.net_model }}
 
-    - name: Print ansible_facts in folded block scalar (adds spa)
+    # - name: Print ansible_facts in folded block scalar (adds spa)
+    #   ansible.builtin.debug:
+    #     msg: >
+    #       IOS type is: {{ ansible_facts.net_iostype }}
+    #       Model is: {{ ansible_facts.net_model }}
+
+    - name : print router running config
+      cisco.ios.ios_command:
+        commands:
+          - show running-config
+      register: show_running_config_output
+
+    - name: Display outputs
       ansible.builtin.debug:
         msg: >
-          IOS type is: {{ ansible_facts.net_iostype }}
-          Model is: {{ ansible_facts.net_model }}
+          {{ show_running_config_output }}
+
+    - name: Display outputs
+      ansible.builtin.debug:
+        msg: |
+          {{ show_running_config_output }}

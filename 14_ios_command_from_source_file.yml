@@ -1,0 +1,23 @@
+---
+- name: Configure interface name
+  hosts: R1
+  gather_facts: false
+
+  tasks:
+
+    - name: Configure interface from source file
+      cisco.ios.ios_config:
+        src: templates/interface_config_src
+      register: interface_config_non_jinja
+
+    - name: Configure interface from jinja template
+      cisco.ios.ios_config:
+        src: templates/int_conf_src.j2
+      with_items: "{{ interface_list }}"
+      register: interface_config_jinja
+
+    - name: Print interface configuration
+      ansible.builtin.debug:
+        msg:
+          - "{{ interface_config_non_jinja }}"
+          - "{{ interface_config_jinja }}"

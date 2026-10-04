@@ -1,0 +1,40 @@
+---
+- name: Configure interface name
+  hosts: R1
+  gather_facts: false
+
+  tasks:
+    # - name: Configure interface parents command
+    #   cisco.ios.ios_config:
+    #     lines:
+    #       - description Test interface
+    #       - no switchport
+    #       - ip address 10.10.10.2 255.255.255.0
+    #     parents: interface GigabitEthernet0/2
+    #   register: interface_config
+
+    # - name: Configure interface from list of dictionaries fetched from host_vars
+    #   cisco.ios.ios_config:
+    #     lines:
+    #       - description {{ item.description }}
+    #       - no switchport
+    #       - no negotiation auto
+    #       - ip address {{ item.ip }}
+    #       - speed {{ item.speed }}
+    #       - duplex {{ item.duplex }}
+    #     parents: interface {{ item.name }}
+    #   with_items: "{{ interface_list }}"
+    #   register: interface_config
+
+    - name: Configure interface from literal string
+      cisco.ios.ios_config:
+        lines: |
+          interface GigabitEthernet0/1
+            description literal
+            no switchport
+            ip address 20.20.20.1 255.255.255.0
+      register: interface_config
+
+    - name: Print interface configuration
+      ansible.builtin.debug:
+        msg: "{{ interface_config }}"

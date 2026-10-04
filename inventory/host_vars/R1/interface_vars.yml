@@ -1,0 +1,15 @@
+---
+interface_list:
+  - name: GigabitEthernet0/2
+    description: Test interface2_from_jinja
+    ip: 10.10.2.1
+    subnet_mask: 255.255.255.0
+    speed: 1000
+    duplex: full
+
+  - name: GigabitEthernet0/3
+    description: Test interface3_from_jinja
+    ip: 10.10.3.1
+    subnet_mask: 255.255.255.0
+    speed: 1000
+    duplex: full

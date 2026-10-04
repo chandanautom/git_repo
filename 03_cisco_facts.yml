@@ -9,7 +9,7 @@
     - name: Gather IOS facts
       cisco.ios.ios_facts:
 # gather only minimum facts not all
-        gather_subset: min
+        gather_subset: all
 
 # Print facts for cisco devices
     - name: Print all gathered facts
