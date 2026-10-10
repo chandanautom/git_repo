@@ -1,0 +1,90 @@
+---
+- name: Set iOS Hostname
+  hosts: R2
+  gather_facts: false
+  tasks:
+
+# merged
+    # - name: Change the hostname of the device
+    #   cisco.ios.ios_hostname:
+    #     config:
+    #       hostname: R2_merged
+    #     state: merged
+    #   register: new_host_name
+
+    # - name: Show the result of the hostname change
+    #   ansible.builtin.debug:
+    #     msg: "{{ new_host_name }}"
+
+# replaced
+    # - name: Change the hostname of the device
+    #   cisco.ios.ios_hostname:
+    #     config:
+    #       hostname: R2_replaced
+    #     state: replaced
+    #   register: new_host_name
+
+    # - name: Show the result of the hostname change
+    #   ansible.builtin.debug:
+    #     msg: "{{ new_host_name }}"
+
+# overridden
+    # - name: Change the hostname of the device
+    #   cisco.ios.ios_hostname:
+    #     config:
+    #       hostname: R2_overridden
+    #     state: overridden
+    #   register: new_host_name
+
+    # - name: Show the result of the hostname change
+    #   ansible.builtin.debug:
+    #     msg: "{{ new_host_name }}"
+
+# gathered
+    # - name: Change the hostname of the device
+    #   cisco.ios.ios_hostname:
+    #     state: gathered
+    #   register: new_host_name
+
+    # - name: Show the result of the hostname change
+    #   ansible.builtin.debug:
+    #     msg: "{{ new_host_name }}"
+
+# rendered
+    # - name: Change the hostname of the device
+    #   cisco.ios.ios_hostname:
+    #     config:
+    #       hostname: R2_rendered
+    #     state: rendered
+    #   register: new_host_name
+
+    # - name: Show the result of the hostname change
+    #   ansible.builtin.debug:
+    #     msg: "{{ new_host_name }}"
+
+# parsed
+    # - name: device configuration
+    #   cisco.ios.ios_config:
+    #     backup: yes
+    #     backup_options:
+    #       filename: R2_config
+
+    # - name: Change the hostname of the device
+    #   cisco.ios.ios_hostname:
+    #     running_config: "{{ lookup('file', 'backup/R2_config') }}"
+    #     state: parsed
+    #   register: new_host_name
+
+    # - name: Show the result of the hostname change
+    #   ansible.builtin.debug:
+    #     msg: "{{ new_host_name }}"
+
+# deleted
+    - name: Change the hostname of the device
+      cisco.ios.ios_hostname:
+        state: deleted
+      register: new_host_name
+
+    - name: Show the result of the hostname change
+      ansible.builtin.debug:
+        msg: "{{ new_host_name }}"

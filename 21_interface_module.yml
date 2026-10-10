@@ -1,0 +1,137 @@
+---
+- name: Set iOS Hostname
+  hosts: R2
+  gather_facts: false
+  tasks:
+
+# gathered
+    # - name: Change the hostname of the device
+    #   cisco.ios.ios_interfaces:
+    #     state: gathered
+    #   register: interface_info
+
+    # - name: Show the result of the hostname change
+    #   ansible.builtin.debug:
+    #     msg:
+    #       - "{{ interface_info }}"
+    #       - "{{ interface_info.gathered }}"
+
+# merged
+    # - name: Change the hostname of the device
+    #   cisco.ios.ios_interfaces:
+    #     config:
+    #       - name: GigabitEthernet0/2
+    #         description: Merged_description
+    #         mtu: 1200
+    #         enabled: true
+    #     state: merged
+    #   register: intf_info
+
+    # - name: Show the result of the hostname change
+    #   ansible.builtin.debug:
+    #     msg: "{{ intf_info }}"
+    
+# replaced
+    # - name: Change the hostname of the device
+    #   cisco.ios.ios_interfaces:
+    #     config:
+    #       - name: GigabitEthernet0/2
+    #         description: replaced_description
+    #         mtu: 9000
+    #         enabled: false
+    #     state: replaced
+    #   register: intf_info
+
+    # - name: Show the result of the hostname change
+    #   ansible.builtin.debug:
+    #     msg: "{{ intf_info }}"
+
+
+# overridden
+    # - name: Change the hostname of the device
+    #   cisco.ios.ios_interfaces:
+    #     config:
+    #       - name: gigabitethernet0/0
+    #         description: overridden_description
+    #         enabled: true
+    #       - name: GigabitEthernet0/3
+    #         description: overridden_description
+    #         enabled: true
+    #     state: overridden
+    #   register: intf_info
+
+    # - name: Show the result of the hostname change
+    #   ansible.builtin.debug:
+    #     msg: "{{ intf_info }}"
+
+# rendered
+    # - name: Change the hostname of the device
+    #   cisco.ios.ios_interfaces:
+    #     config:
+    #       - name: gigabitethernet0/0
+    #       - name: GigabitEthernet0/3
+    #         description: rendered_description
+    #         enabled: true
+    #     state: rendered
+    #   register: intf_info
+
+    # - name: Show the result of the hostname change
+    #   ansible.builtin.debug:
+    #     msg: "{{ intf_info }}"
+
+# parsed
+    # - name: device configuration
+    #   cisco.ios.ios_config:
+    #     backup: yes
+    #     backup_options:
+    #       filename: R2_config
+
+    # - name: Change the hostname of the device
+    #   cisco.ios.ios_interfaces:
+    #     running_config: "{{ lookup('file', 'backup/R2_config') }}"
+    #     state: parsed
+    #   register: intf_info
+
+    # - name: Show the result of the hostname change
+    #   ansible.builtin.debug:
+    #     msg: "{{ intf_info }}"
+
+
+# template
+    # - name: Change the hostname of the device
+    #   cisco.ios.ios_interfaces:
+    #     config:
+    #       - name: gigabitethernet0/2
+    #         template: demo-template
+    #     state: merged
+    #   register: intf_info
+
+    # - name: Show the result of the hostname change
+    #   ansible.builtin.debug:
+    #     msg: "{{ intf_info }}"
+
+
+# deleted
+    # - name: Change the hostname of the device
+    #   cisco.ios.ios_interfaces:
+    #     config:
+    #       - name: GigabitEthernet0/2
+    #     state: deleted
+    #   register: intf_info
+
+    # - name: Show the result of the hostname change
+    #   ansible.builtin.debug:
+    #     msg: "{{ intf_info }}"
+
+
+# purged
+    - name: Change the hostname of the device
+      cisco.ios.ios_interfaces:
+        config:
+          - name: Loopback100
+        state: purged
+      register: intf_info
+
+    - name: Show the result of the hostname change
+      ansible.builtin.debug:
+        msg: "{{ intf_info }}"
