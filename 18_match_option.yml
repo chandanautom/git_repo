@@ -1,0 +1,33 @@
+---
+- name: Configure interface name
+  hosts: R1
+  gather_facts: false
+
+  tasks:
+    - name: Configure interface parents command
+      cisco.ios.ios_config:
+        lines:
+          - description Test interface
+          - no switchport
+          - ip address 10.10.10.1 255.255.255.0
+          - no shutdown
+          - no negotiation auto
+        parents: interface GigabitEthernet0/1
+        after : shutdown
+        match: strict
+      register: interface_config
+
+    - name: Print interface configuration
+      ansible.builtin.debug:
+        msg: "{{ interface_config }}"
+
+    - name: read the show commands
+      cisco.ios.ios_command:
+        commands:
+          - show run int GigabitEthernet0/1
+          - show ip int brief
+      register: interface_command
+   
+    - name: Print interface configuration
+      ansible.builtin.debug:
+        msg: "{{ interface_command.stdout_lines }}"

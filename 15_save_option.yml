@@ -1,0 +1,29 @@
+---
+- name: Configure Access list
+  hosts: R1
+  gather_facts: false
+
+  tasks:
+
+    - name: Configure interface and save when particular lines are changed
+      cisco.ios.ios_config:
+        lines:
+          - description save_option
+        parents: interface GigabitEthernet0/3
+        save_when: changed
+      register: interface_config
+
+
+    # - name: Configure interface and save when particular lines are changed
+    #   cisco.ios.ios_config:
+    #     lines:
+    #       - description save_option
+    #     parents: interface GigabitEthernet0/3
+    #     save_when: modified
+    #   register: interface_config
+
+
+    - name: Print interface configuration
+      ansible.builtin.debug:
+        msg: "{{ interface_config }}"
+

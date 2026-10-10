@@ -1,0 +1,32 @@
+
+---
+- name: Configure Access list
+  hosts: R1
+  gather_facts: false
+
+  tasks:
+
+    - name: Configure ACL
+      cisco.ios.ios_config:
+        lines:
+          - 10 permit ip host 10.10.10.10 any
+          - 20 permit ip host 10.10.10.2 any
+          - 30 permit ip host 10.10.10.3 any
+          - 40 deny ip host 10.10.10.4 any
+        parents: ip access-list extended ACL_TEST
+        # before: no ip access-list extended ACL_TEST
+        # match: exact
+      register: acl_config
+
+    - name: Print ACL lines
+      ansible.builtin.debug:
+        msg: "{{ acl_config }}"
+
+    - name: Get ACL configuration
+      cisco.ios.ios_command:
+        commands: show ip access-lists ACL_TEST
+      register: acl_command
+
+    - name: Print ACL configuration
+      ansible.builtin.debug:
+        msg: "{{ acl_command.stdout_lines }}"
