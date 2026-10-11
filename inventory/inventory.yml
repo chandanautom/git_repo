@@ -1,5 +1,6 @@
 all:
   children:
+
     routers:
       vars:
         ansible_connection: ansible.netcommon.network_cli
@@ -8,13 +9,16 @@ all:
         ansible_password: cisco
         ip_domain_name: inv_file.com
       children:
+
         group1:
           hosts:
             R1:
+
         group2:
           hosts:
             R2:
               ip_domain_name: R2.com
+
     ungrouped:
       hosts:
         localhost:

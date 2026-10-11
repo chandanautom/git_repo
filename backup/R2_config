@@ -60,13 +60,12 @@ interface GigabitEthernet0/0
 !
 interface GigabitEthernet0/1
  no switchport
- no ip address
+ ip address 10.10.10.1 255.255.255.0
  negotiation auto
 !
 interface GigabitEthernet0/2
- description replaced_description
- mtu 9000
- no negotiation auto
+ switchport access vlan 100
+ negotiation auto
 !
 interface GigabitEthernet0/3
  speed 1000

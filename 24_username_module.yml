@@ -1,0 +1,45 @@
+---
+- name: username module
+  hosts: R2
+  gather_facts: false
+  tasks:
+
+# add new user
+    # - name: Create username
+    #   no_log: true
+    #   cisco.ios.ios_user:
+    #     name: ansible_user
+    #     hashed_password:
+    #       type: 5
+    #       value: $1$BFvg$ZbkA8i/Xd4.fvEWUlQHd40
+    #     privilege: 15
+    #   register: new_user
+
+    # - name: printer newely added user
+    #   ansible.builtin.debug:
+    #     msg: "{{ new_user }}"
+
+# delete user
+    # - name: Delete username
+    #   no_log: true
+    #   cisco.ios.ios_user:
+    #     name: ansible_user
+    #     state: absent  
+    #   register: delete_user
+
+    # - name: printer deleted user
+    #   ansible.builtin.debug:
+    #     msg: "{{ delete_user }}"
+
+# Purge user
+    - name: Purge username
+      no_log: true
+      cisco.ios.ios_user:
+        # aggregate:
+        #   - name: cisco
+        purge: true
+      register: purged_user
+
+    - name: printer deleted user
+      ansible.builtin.debug:
+        msg: "{{ purged_user }}"

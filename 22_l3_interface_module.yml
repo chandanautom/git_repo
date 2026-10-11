@@ -1,0 +1,112 @@
+---
+- name: L3 interface module
+  hosts: R2
+  gather_facts: false
+  tasks:
+
+# gathered
+    # - name: Gather L3 interface information
+    #   cisco.ios.ios_l3_interfaces:
+    #     state: gathered
+    #   register: interface_info
+
+    # - name: Show the result of the L3 interface gathering
+    #   ansible.builtin.debug:
+    #     msg: "{{ interface_info }}"
+
+# # parsed
+    # - name: Parse the interface information
+    #   cisco.ios.ios_l3_interfaces:
+    #     state: parsed
+    #     running_config: "{{ lookup('file', 'backup/R2_config') }}"
+    #   register: parsed_interfaces
+
+    # - name: Show the parsed interface information
+    #   ansible.builtin.debug:
+    #     msg:
+    #       - "{{ parsed_interfaces }}"
+
+# # rendered
+    # - name: Render the interface information
+    #   cisco.ios.ios_l3_interfaces:
+    #     config:
+    #       - name: GigabitEthernet0/1
+    #         ipv4:
+    #           - address: 10.10.10.1 255.255.255.0
+    #       - name: GigabitEthernet0/2
+    #         ipv4:
+    #           - address: 20.20.20.1/24
+    #     state: rendered
+    #   register: rendered_interfaces
+
+    # - name: Show the rendered interface information
+    #   ansible.builtin.debug:
+    #     msg:
+    #       - "{{ rendered_interfaces }}"
+
+# # merged
+    # - name: Merge the interface information
+    #   cisco.ios.ios_l3_interfaces:
+    #     config:
+    #       - name: GigabitEthernet0/1
+    #         ipv4:
+    #           - address: 10.10.10.1/24
+    #       - name: GigabitEthernet0/2
+    #         ipv4:
+    #           - address: 20.20.20.1/24
+    #     state: merged
+    #   register: merged_interfaces
+
+    # - name: Show the merged interface information
+    #   ansible.builtin.debug:
+    #     msg:
+    #       - "{{ merged_interfaces }}"
+
+# #replaced
+    # - name: replace the interface information
+    #   cisco.ios.ios_l3_interfaces:
+    #     config:
+    #       - name: GigabitEthernet0/1
+    #         ipv4:
+    #           - address: 10.10.10.10/24
+    #       - name: GigabitEthernet0/2
+    #         ipv4:
+    #           - address: 20.20.20.10/24
+    #     state: replaced
+    #   register: replaced_interfaces
+
+    # - name: Show the replaced interface information
+    #   ansible.builtin.debug:
+    #     msg:
+    #       - "{{ replaced_interfaces }}"
+
+# #overridden
+    # - name: overridden the interface information
+    #   cisco.ios.ios_l3_interfaces:
+    #     config:
+    #       - name: GigabitEthernet0/0
+    #         ipv4:
+    #           - address: 192.168.0.132/24
+    #       - name: GigabitEthernet0/2
+    #         ipv4:
+    #           - address: 20.20.20.2/24
+    #     state: overridden
+    #   register: overridden_interfaces
+
+    # - name: Show the overridden interface information
+    #   ansible.builtin.debug:
+    #     msg:
+    #       - "{{ overridden_interfaces }}"
+
+# #deleted
+    - name: deleted the interface information
+      cisco.ios.ios_l3_interfaces:
+        config:
+          - name: GigabitEthernet0/2
+        state: deleted
+      register: deleted_interfaces
+
+    - name: Show the deleted interface information
+      ansible.builtin.debug:
+        msg:
+          - "{{ deleted_interfaces }}"
